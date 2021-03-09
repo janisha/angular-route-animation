@@ -1,5 +1,4 @@
 import { ScienceComponent } from "./science/science.component";
-import { TechnologyComponent } from "./technology/technology.component";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { CustomResolver } from "./custom-resolver";
@@ -10,14 +9,14 @@ const routes: Routes = [
     component: ScienceComponent,
     resolve: {
       num: CustomResolver
-    },
+    }
     // data: {
     //   shouldReuse: false
     // }
   },
   {
     path: "sports",
-    loadChildren: "./modules/sports/sports.module#SportsModule"
+    loadChildren: () => import("./modules/sports/sports.module").then(x => x.SportsModule)
   },
   { path: "**", redirectTo: "" }
 ];
